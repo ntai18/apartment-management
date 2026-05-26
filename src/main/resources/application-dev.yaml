@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  url: http
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/apartment-management
+    username: postgres
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.apartmentmanagement.domain
+  configuration:
+    default-enum-type-handler: org.apache.ibatis.type.EnumTypeHandler # convert Enum sang dạng String
+    map-underscore-to-camel-case: true # lỗi mapping
+
+
+
+jwt:
+  secretKey: oZxx2f7vpDpoBHWQGTYwFPqKtdSAxkn7OiAH6agent19H7dUq6Ne4mTuKGDre2Zg
+
+api:
+  prefix: /api
+  version: /v1
