@@ -2,6 +2,7 @@ package com.apartmentmanagement.features.authencation.service.impl;
 
 import com.apartmentmanagement.common.exception.ApartmentManagementException;
 import com.apartmentmanagement.common.exception.ErrorCode;
+import com.apartmentmanagement.common.type.Status;
 import com.apartmentmanagement.features.authencation.converter.AccountConverter;
 import com.apartmentmanagement.features.authencation.domain.Account;
 import com.apartmentmanagement.features.authencation.domain.dto.LoginRequest;
@@ -16,8 +17,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import javax.security.auth.login.AccountException;
 
 @Service
 @RequiredArgsConstructor
@@ -43,5 +42,20 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         Authentication authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
         Account account = (Account) authentication.getPrincipal();
         return jwtService.generateAccessToken(account);
+    }
+
+    @Override
+    public void deleteAccount(Long accountId) {
+        accountMapper.softDeleteAccount(accountId);
+    }
+
+    @Override
+    public void banedAccount(Long accountId) {
+        accountMapper.softBanedAccount(accountId);
+    }
+
+    @Override
+    public void unBanedAccount(Long accountId) {
+        accountMapper.unBanedAccount(accountId);
     }
 }

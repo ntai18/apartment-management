@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.apartmentmanagement.features.profile.mapper.ProfileMapper">
+    <insert id="createProfile">
+        INSERT INTO Profile(account_id, url_avatar, full_name, birth_date, bio)
+        VALUES (#{accountId}, #{profileRequest.urlAvatar}, #{profileRequest.fullName}, #{profileRequest.birthDate}, #{profileRequest.bio})
+    </insert>
+
+    <select id="isValidation">
+        SELECT account_id FROM Profile
+        WHERE account_id = #{accountId}
+    </select>
+
+    <select id="getProfile">
+        SELECT * FROM Profile
+        WHERE account_id = #{accountId}
+    </select>
+
+<!--    <update id="updateProfile">-->
+<!--        UPDATE Profile-->
+<!--        <set>-->
+<!--            <if test="profileRequest.urlAvatar != null">-->
+<!--                url_avatar = #{profileRequest.urlAvatar},-->
+<!--            </if>-->
+<!--            <if test="profileRequest.bio != null">-->
+<!--                bio = #{profileRequest.bio},-->
+<!--            </if>-->
+<!--            <if test="profileRequest.fullName != null">-->
+<!--                full_name = #{profileRequest.fullName},-->
+<!--            </if>-->
+<!--            <if test="profileRequest.birthDate != null">-->
+<!--                birth_date = #{profileRequest.birthDate},-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        WHERE account_id = #{accountId}-->
+<!--    </update> (trường hợp update dùng patch check null ở mybatis sẽ tối ưu hiệu năng hơn) -->
+
+    <update id="updateProfile">
+        UPDATE Profile
+        SET
+            url_avatar = #{profileRequest.urlAvatar},
+            bio = #{profileRequest.bio},
+            full_name = #{profileRequest.fullName},
+            birth_date = #{profileRequest.birthDate}
+        WHERE account_id = #{accountId}
+    </update>
+
+</mapper>

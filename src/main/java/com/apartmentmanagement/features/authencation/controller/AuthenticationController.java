@@ -28,6 +28,6 @@ public class AuthenticationController {
     }
     @PostMapping("/login")
     public ResponseEntity<ApiResponse<String>> login(@Valid @RequestBody LoginRequest loginRequest) throws JOSEException {
-        return ResponseEntity.ok().body(ApiResponse.successData("Login Successfully!", authenticationService.login(loginRequest)));
+        return ResponseEntity.ok().body(ApiResponse.successMessData("Login Successfully!", authenticationService.login(loginRequest)));
     }
 }

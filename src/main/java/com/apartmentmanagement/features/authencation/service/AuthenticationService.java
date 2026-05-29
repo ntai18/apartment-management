@@ -8,4 +8,10 @@ public interface AuthenticationService {
     void register(RegisterRequest registerRequest);
 
     String login(LoginRequest loginRequest) throws JOSEException;
+
+    void deleteAccount(Long accountId);
+
+    void banedAccount(Long accountId);
+
+    void unBanedAccount(Long accountId);
 }

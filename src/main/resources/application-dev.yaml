@@ -25,3 +25,9 @@ jwt:
 api:
   prefix: /api
   version: /v1
+
+logging:
+  level:
+    org:
+      springframework:
+        security: trace

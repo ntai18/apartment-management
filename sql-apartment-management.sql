@@ -9,14 +9,10 @@ CREATE TABLE Account(
  create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
-SELECT * FROM Account
-Where email = 'tai@gmail.com' OR phone = '123123' OR username = 'tai'
-
-
 CREATE TABLE Profile(
 id BIGSERIAL PRIMARY KEY,
 account_id BIGINT NOT NULL UNIQUE,
+url_avatar VARCHAR(255),
 full_name VARCHAR(50) NOT NULL,
 birth_date DATE,
 bio VARCHAR(255),
@@ -25,5 +21,27 @@ bio VARCHAR(255),
 		REFERENCES Account(id)
 );
 
+CREATE TABLE Building(
+id BIGSERIAL PRIMARY KEY,
+manager_id BIGINT NOT NULL UNIQUE,
+name VARCHAR(255) NOT NULL,
+floor_number SMALLINT NOT NULL,
+create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+status VARCHAR(20) NOT NULL,
+	CONSTRAINT fk_building_account
+		FOREIGN KEY (manager_id)
+		REFERENCES Account(id)
+)
 
-Se
+CREATE TABLE Floor(
+id BIGSERIAL PRIMARY KEY,
+building_id BIGINT NOT NULL,
+name VARCHAR(255) NOT NULL,
+room_number SMALLINT NOT NULL,
+create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	CONSTRAINT fk_floor_building
+		FOREIGN KEY (building_id)
+		REFERENCES Building(id) 
+)
+
+

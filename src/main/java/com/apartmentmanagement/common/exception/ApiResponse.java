@@ -18,14 +18,18 @@ public class ApiResponse<T> {
     public static <T> ApiResponse<T> success(String message) {
         return new ApiResponse<>(200, message, null);
     }
-    public static <T> ApiResponse<T> successCustom(int code, String message) {
+    public static <T> ApiResponse<T> successMess(int code, String message) {
         return new ApiResponse<>(code, message, null);
     }
 
-    public static <T> ApiResponse<T> successData(String message, T data) {
+    public static <T> ApiResponse<T> successMessData(String message, T data) {
         return new ApiResponse<>(200, message, data);
     }
+    public static <T> ApiResponse<T> successData(T data) {
+        return new ApiResponse<>(200, null, data);
+    }
 
-    public static <T> ApiResponse<T> errorException(int code, String message, T data) {
+    public static <T> ApiResponse<T> errorException(int code, String message) {
         return new ApiResponse<>(code, message, null);
-    }}
+    }
+}

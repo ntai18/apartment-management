@@ -11,11 +11,11 @@ public class GlobalHandlerException {
     @ExceptionHandler(ApartmentManagementException.class)
     public ResponseEntity<ApiResponse> handleException(ApartmentManagementException e){
         ErrorCode errorCode = e.getErrorCode();
-        return ResponseEntity.ok().body(ApiResponse.errorException(errorCode.getCode(), errorCode.getMessage(), null));
+        return ResponseEntity.ok().body(ApiResponse.errorException(errorCode.getCode(), errorCode.getMessage()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiResponse> handleException(MethodArgumentNotValidException e) {
-        return ResponseEntity.ok().body(ApiResponse.successCustom(e.getStatusCode().value(), e.getBindingResult().getFieldError().getDefaultMessage()));
+        return ResponseEntity.ok().body(ApiResponse.errorException(e.getStatusCode().value(), e.getBindingResult().getFieldError().getDefaultMessage()));
     }
 }

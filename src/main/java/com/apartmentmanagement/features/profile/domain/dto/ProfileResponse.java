@@ -1,16 +1,14 @@
 package com.apartmentmanagement.features.profile.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDate;
 
 @Getter
 @Setter
-public class ProfileRequest {
+public class ProfileResponse {
     private String urlAvatar;
-    @NotEmpty(message = "full name not null")
     private String fullName;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate birthDate;

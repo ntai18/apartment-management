@@ -20,16 +20,16 @@ public class JwtServiceImpl implements JwtService {
     private String secretKey;
 
     @Override
-    public String generateAccessToken(Account user) throws JOSEException {
+    public String generateAccessToken(Account account) throws JOSEException {
         JWSHeader jwsHeader = new JWSHeader(JWSAlgorithm.HS512);
         Date now = new Date();
         JWTClaimsSet jwtClaimsSet = new JWTClaimsSet.Builder()
                 .issuer("am.tai")
                 .issueTime(now)
-                .subject(user.getUsername())
-                .expirationTime(Date.from(now.toInstant().plus(50, ChronoUnit.MINUTES)))
-                .claim("id", user.getId())
-                .claim("role", user.getAuthorities().stream().map(GrantedAuthority::getAuthority))
+                .subject(account.getUsername())
+                .expirationTime(Date.from(now.toInstant().plus(50, ChronoUnit.HOURS)))
+                .claim("id", account.getId())
+                .claim("role", account.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList())
                 .build();
         Payload payload = new Payload(jwtClaimsSet.toJSONObject());
         JWSObject jwsObject = new JWSObject(jwsHeader, payload);

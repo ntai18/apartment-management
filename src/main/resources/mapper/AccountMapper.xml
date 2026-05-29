@@ -20,6 +20,22 @@
            OR username = #{username}
     </select>
 
+    <update id="softDeleteAccount">
+        UPDATE Account
+        SET status = 'DELETE'
+        WHERE id = #{accountId}
+    </update>
 
+    <update id="softBanedAccount">
+        UPDATE Account
+        SET status = 'BANED'
+        WHERE id = #{accountId}
+    </update>
+
+    <update id="unBanedAccount">
+        UPDATE Account
+        SET status = 'ACTIVE'
+        WHERE id = #{accountId}
+    </update>
 
 </mapper>
