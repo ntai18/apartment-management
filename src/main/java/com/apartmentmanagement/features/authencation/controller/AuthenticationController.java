@@ -26,6 +26,7 @@ public class AuthenticationController {
         authenticationService.register(registerRequest);
         return ResponseEntity.ok().body(ApiResponse.success("Register Successfully!"));
     }
+
     @PostMapping("/login")
     public ResponseEntity<ApiResponse<String>> login(@Valid @RequestBody LoginRequest loginRequest) throws JOSEException {
         return ResponseEntity.ok().body(ApiResponse.successMessData("Login Successfully!", authenticationService.login(loginRequest)));
